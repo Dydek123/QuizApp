@@ -1,3 +1,6 @@
+const fs = require('fs');
+const prepareQuestions = require('../resources/prepareQuestions');
+
 const gameRoute = app =>{
     let goodAnswers = 0;
     let gameOver = false;
@@ -5,19 +8,32 @@ const gameRoute = app =>{
     let questionToTheCrowdUsed = false;
     let halfOnHalfUsed = false;
 
-    // const questions = [
-    //     {question: 'Jaki jest najlepszy język programowania', answers:['C++','Fortran','JS','Java'], correctAnswer:2},
-    //     {question: 'Czy ten kurs jest fajny', answers:['Nie wiem','Nie','Tak','Może'], correctAnswer:2},
-    //     {question: 'Czy chcesz zjeść pizze', answers:['Nie wiem','Nie','Tak','Może'], correctAnswer:2},
-    //     {question: 'Jaki kolor jest najszybszy', answers:['Czerwony','Zielony','Niebieski','Różowy'], correctAnswer:0}
-    // ]
-
     let questions= [];
-    const fs = require('fs')
+
     fs.readFile('./resources/questions.json','utf-8',(err,data) => {
         if (err)
             return console.log(err);
         questions = JSON.parse(data);
+        // console.log(questions.results)
+    })
+
+    app.get('/read', (req, res) => {
+        fs.readFile('./resources/test.json','utf-8',(err,data) => {
+            if (err)
+                return console.log(err);
+            questions = JSON.parse(data);
+            // const {category, type, difficulty, question, correct_answer, incorrect_answers} = questions.results[0]
+            for (const el of questions.results) {
+                console.log(el.incorrect_answers)
+            }
+            // console.log(questions.results)
+        })
+    });
+
+    app.get('/start', (req, res) => {
+        const newData = {"id":1};
+        prepareQuestions();
+        res.redirect('/')
     })
 
     app.get('/question', (req, res) => {
