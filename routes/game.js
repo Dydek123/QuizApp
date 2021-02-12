@@ -5,12 +5,20 @@ const gameRoute = app =>{
     let questionToTheCrowdUsed = false;
     let halfOnHalfUsed = false;
 
-    const questions = [
-        {question: 'Jaki jest najlepszy język programowania', answers:['C++','Fortran','JS','Java'], correctAnswer:2},
-        {question: 'Czy ten kurs jest fajny', answers:['Nie wiem','Nie','Tak','Może'], correctAnswer:2},
-        {question: 'Czy chcesz zjeść pizze', answers:['Nie wiem','Nie','Tak','Może'], correctAnswer:2},
-        {question: 'Jaki kolor jest najszybszy', answers:['Czerwony','Zielony','Niebieski','Różowy'], correctAnswer:0}
-    ]
+    // const questions = [
+    //     {question: 'Jaki jest najlepszy język programowania', answers:['C++','Fortran','JS','Java'], correctAnswer:2},
+    //     {question: 'Czy ten kurs jest fajny', answers:['Nie wiem','Nie','Tak','Może'], correctAnswer:2},
+    //     {question: 'Czy chcesz zjeść pizze', answers:['Nie wiem','Nie','Tak','Może'], correctAnswer:2},
+    //     {question: 'Jaki kolor jest najszybszy', answers:['Czerwony','Zielony','Niebieski','Różowy'], correctAnswer:0}
+    // ]
+
+    let questions= [];
+    const fs = require('fs')
+    fs.readFile('./resources/questions.json','utf-8',(err,data) => {
+        if (err)
+            return console.log(err);
+        questions = JSON.parse(data);
+    })
 
     app.get('/question', (req, res) => {
         if(goodAnswers === questions.length){
