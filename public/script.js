@@ -8,16 +8,16 @@ const questionToTheCrowd = document.querySelector('#questionToTheCrowd');
 
 const showNextQuestion = () => {
     fetch('/question', {
-        method: 'GET',
-    })
-        .then(data=>data.json())
-        .then(data=>{
+            method: 'GET',
+        })
+        .then(data => data.json())
+        .then(data => {
             fillElements(data)
-    });
+        });
 }
 
 const fillElements = (data) => {
-    if (data.winner === true){
+    if (data.winner === true) {
         gameBoard.style.display = 'none';
         h2.innerText = 'WYGRAŁAŚ/EŚ!!!'
         return;
@@ -28,26 +28,27 @@ const fillElements = (data) => {
 
     }
     for (const button of answers) {
-        button.style.display = 'inline-block';
+        button.style.opacity = 1;
     }
     document.querySelector('#tip').innerText = '';
     question.innerText = data.question;
-    for (const i in data.answers){
-        answers[i].innerText=data.answers[i];
+    document.querySelector('#category').innerText = data.category;
+    for (const i in data.answers) {
+        answers[i].innerText = data.answers[i];
     }
 }
 showNextQuestion();
 
 const goodAnswers = document.querySelector('#good-answers');
-const handleAnswerFeedback = (data) =>{
+const handleAnswerFeedback = (data) => {
     goodAnswers.innerText = data.goodAnswers;
     showNextQuestion();
 };
 
 const sendAnswer = (answerIndex) => {
     fetch(`/answer/${answerIndex}`, {
-        method:'POST',
-    })
+            method: 'POST',
+        })
         .then(res => res.json())
         .then(data => {
             handleAnswerFeedback(data);
@@ -61,24 +62,24 @@ for (const button of answers) {
     })
 }
 
-const callToFriend = () =>{
+const callToFriend = () => {
     fetch(`/help/friend`, {
-        method:'GET',
-    })
+            method: 'GET',
+        })
         .then(res => res.json())
         .then(data => {
             handleFriendAnswer(data)
         })
 }
 
-const handleFriendAnswer = (tip) =>{
+const handleFriendAnswer = (tip) => {
     document.querySelector('#tip').innerText = tip.text;
 }
 
-const halfOnHaldHelp = () =>{
+const halfOnHaldHelp = () => {
     fetch(`/help/halfOnHalf`, {
-        method:'GET',
-    })
+            method: 'GET',
+        })
         .then(res => res.json())
         .then(data => {
             if (!data.text)
@@ -88,19 +89,19 @@ const halfOnHaldHelp = () =>{
         })
 }
 
-const handleHalfOnHalf = (tip) =>{
-    const {index1, index2} = tip;
+const handleHalfOnHalf = (tip) => {
+    const { index1, index2 } = tip;
     for (const button of answers) {
-        if (Number(button.dataset.answer) !== index1 && Number(button.dataset.answer) !== index2){
-            button.style.display = 'none';
+        if (Number(button.dataset.answer) !== index1 && Number(button.dataset.answer) !== index2) {
+            button.style.opacity = 0;
         }
     }
 }
 
-const questionToTheCrowdHelp = () =>{
+const questionToTheCrowdHelp = () => {
     fetch(`/help/questionToTheCrowd`, {
-        method:'GET',
-    })
+            method: 'GET',
+        })
         .then(res => res.json())
         .then(data => {
             if (!data.text)
@@ -110,7 +111,7 @@ const questionToTheCrowdHelp = () =>{
         })
 }
 
-const handleQuestionToTheCrowd = (tip) =>{
+const handleQuestionToTheCrowd = (tip) => {
     for (const button of answers) {
         button.innerText += ` ${tip.chart[button.dataset.answer]}%`
     }
@@ -118,5 +119,5 @@ const handleQuestionToTheCrowd = (tip) =>{
 
 
 callFriend.addEventListener('click', callToFriend);
-halfOnHalf.addEventListener('click',halfOnHaldHelp);
+halfOnHalf.addEventListener('click', halfOnHaldHelp);
 questionToTheCrowd.addEventListener('click', questionToTheCrowdHelp)

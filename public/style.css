@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+}
+
+#container {
+  background-color: #03254c;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  height: 10vh;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+section article {
+  height: 80vh;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#questionBoard {
+  background-color: #187bcd;
+  border: 2px solid #d0efff;
+  border-radius: 10px;
+  height: 50vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#questionBoard h2 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  height: 85%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#lifelines {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  width: 100%;
+  height: 15%;
+}
+
+#lifelines button {
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+  color: #d0efff;
+  border: 2px solid #d0efff;
+  background: transparent;
+  font-weight: 600;
+  font-size: 1.5rem;
+  width: 5rem;
+  height: 100%;
+}
+
+#lifelines button:hover {
+  color: white;
+}
+
+#lifelines #tip {
+  grid-column: 1/4;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#answers {
+  padding-top: 6vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 30vh;
+}
+
+#answers button {
+  background-color: #187bcd;
+  border: 2px solid #d0efff;
+  margin-bottom: 1rem;
+  width: 48%;
+  height: 4rem;
+  font-size: 1.2rem;
+  border-radius: 10px;
+}
+
+#answers button:hover {
+  background: linear-gradient(-45deg, #54a5f1, #d0efff, #54a5f1, #187bcd);
+  background-size: 400% 400%;
+  animation: gradient 8s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+footer {
+  height: 10vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+}
+/*# sourceMappingURL=style.css.map */

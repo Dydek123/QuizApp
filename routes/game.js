@@ -78,9 +78,9 @@ const gameRoute = app =>{
             })
         } else {
             const nextQuestion = questions[goodAnswers];
-            const {question, answers} = nextQuestion;
+            const {question, answers, category} = nextQuestion;
             res.json({
-                question, answers,
+                question, answers, category,
             })
         }
     });
