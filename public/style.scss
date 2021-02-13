@@ -14,6 +14,25 @@ $headerHeight:10vh;
     border: 2px solid $borderColor;
 }
 
+@mixin buttonHover {
+    &:hover {
+        background: linear-gradient(-45deg, #54a5f1, $borderColor, #54a5f1, $fillColor);
+        background-size: 400% 400%;
+        animation: gradient 8s ease infinite;
+    }
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+}
+
 * {
     margin: 0;
 }
@@ -56,6 +75,7 @@ section {
         font-size: 1.5rem;
         font-weight: 400;
         height: 85%;
+        padding: 0 2rem;
         @include flexCenter();
     }
 }
@@ -88,6 +108,20 @@ section {
     }
 }
 
+#reset {
+    @include buttonHover();
+    @include flexCenter();
+    @include backgroundWithBorder();
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+    border-radius: 10px;
+    width: 20%;
+    height: 3rem;
+    margin-bottom: 10%;
+    display: none;
+}
+
 #answers {
     padding-top: 6vh;
     display: flex;
@@ -103,22 +137,7 @@ section {
         height: 4rem;
         font-size: 1.2rem;
         border-radius: 10px;
-        &:hover {
-            background: linear-gradient(-45deg, #54a5f1, $borderColor, #54a5f1, $fillColor);
-            background-size: 400% 400%;
-            animation: gradient 8s ease infinite;
-        }
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
+        @include buttonHover();
     }
 }
 

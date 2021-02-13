@@ -50,6 +50,7 @@ section article {
   font-size: 1.5rem;
   font-weight: 400;
   height: 85%;
+  padding: 0 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,6 +87,40 @@ section article {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#reset {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #187bcd;
+  border: 2px solid #d0efff;
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  border-radius: 10px;
+  width: 20%;
+  height: 3rem;
+  margin-bottom: 10%;
+  display: none;
+}
+
+#reset:hover {
+  background: linear-gradient(-45deg, #54a5f1, #d0efff, #54a5f1, #187bcd);
+  background-size: 400% 400%;
+  animation: gradient 8s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 #answers {

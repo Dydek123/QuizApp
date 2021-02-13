@@ -39,7 +39,6 @@ const gameRoute = app =>{
         if (err)
             return console.log(err);
         let arr = [];
-        let p = 'In &quot;One Piece&quot;, who confirms the existence of the legendary treasure, One Piece?'
         data = replaceBadString(data);
         const apiQuestions = JSON.parse(data);
         // const {category, type, difficulty, question, correct_answer, incorrect_answers} = questions.results[0]
@@ -53,7 +52,6 @@ const gameRoute = app =>{
             })
         }
         questions = arr
-        console.log(questions)
     })
 
     app.get('/reset', (req, res) => {

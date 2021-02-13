@@ -1,6 +1,6 @@
 const question = document.querySelector('#question');
 const answers = document.querySelectorAll('.answerButton');
-const gameBoard = document.querySelector('#gameboard');
+const resetButton = document.querySelector('#reset');
 const h2 = document.querySelector('h2');
 const callFriend = document.querySelector('#callToFriend');
 const halfOnHalf = document.querySelector('#halfOnHlf');
@@ -18,12 +18,12 @@ const showNextQuestion = () => {
 
 const fillElements = (data) => {
     if (data.winner === true) {
-        gameBoard.style.display = 'none';
         h2.innerText = 'WYGRAŁAŚ/EŚ!!!'
         return;
     } else if (data.loser === true) {
-        gameBoard.style.display = 'none';
-        h2.innerText = 'Tym razem się nie udało, spróbuj ponownie'
+        h2.innerText = 'Tym razem się nie udało, spróbuj ponownie';
+        h2.style.height = '50%';
+        resetButton.style.display = 'flex';
         return;
 
     }
@@ -39,9 +39,9 @@ const fillElements = (data) => {
 }
 showNextQuestion();
 
-const goodAnswers = document.querySelector('#good-answers');
+// const goodAnswers = document.querySelector('#good-answers');
 const handleAnswerFeedback = (data) => {
-    goodAnswers.innerText = data.goodAnswers;
+    // goodAnswers.innerText = data.goodAnswers;
     showNextQuestion();
 };
 
@@ -113,7 +113,7 @@ const questionToTheCrowdHelp = () => {
 
 const handleQuestionToTheCrowd = (tip) => {
     for (const button of answers) {
-        button.innerText += ` ${tip.chart[button.dataset.answer]}%`
+        button.innerText += ` (${tip.chart[button.dataset.answer]}%)`
     }
 }
 
