@@ -6,7 +6,7 @@ const prepareQuestions = () => {
     fetch('https://opentdb.com/api.php?amount=12&type=multiple')
         .then(res => res.json())
         .then(json => {
-            fs.writeFile("./resources/test.json", JSON.stringify(json), function(err) {
+            fs.writeFile("./resources/questions.json", JSON.stringify(json), function(err) {
                 if(err) {
                     return console.log(err);
                 }
