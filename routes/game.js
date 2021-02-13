@@ -1,6 +1,31 @@
 const fs = require('fs');
 const prepareQuestions = require('../resources/prepareQuestions');
 
+const shuffle = array => {
+    let currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
+
+const replaceBadString = (data) => {
+    data = data.split("&quot;").join("'")
+    data = data.split("&#039;").join("'")
+    return data;
+}
+
 const gameRoute = app =>{
     let goodAnswers = 0;
     let gameOver = false;
@@ -10,28 +35,34 @@ const gameRoute = app =>{
 
     let questions= [];
 
-    fs.readFile('./resources/questions.json','utf-8',(err,data) => {
+    fs.readFile('./resources/test.json','utf-8',(err,data) => {
         if (err)
             return console.log(err);
-        questions = JSON.parse(data);
-        // console.log(questions.results)
+        let arr = [];
+        let p = 'In &quot;One Piece&quot;, who confirms the existence of the legendary treasure, One Piece?'
+        data = replaceBadString(data);
+        const apiQuestions = JSON.parse(data);
+        // const {category, type, difficulty, question, correct_answer, incorrect_answers} = questions.results[0]
+        for (const question of apiQuestions.results) {
+            let answers = question.incorrect_answers;
+            answers.push(question.correct_answer);
+            arr.push({"category": question.category ,
+                "question": question.question,
+                "answers": shuffle(answers),
+                "correctAnswer" : answers.indexOf(question.correct_answer)
+            })
+        }
+        questions = arr
+        console.log(questions)
     })
 
-    app.get('/read', (req, res) => {
-        fs.readFile('./resources/test.json','utf-8',(err,data) => {
-            if (err)
-                return console.log(err);
-            questions = JSON.parse(data);
-            // const {category, type, difficulty, question, correct_answer, incorrect_answers} = questions.results[0]
-            for (const el of questions.results) {
-                console.log(el.incorrect_answers)
-            }
-            // console.log(questions.results)
-        })
-    });
+    app.get('/reset', (req, res) => {
+        goodAnswers = 0 ;
+        prepareQuestions();
+        res.redirect('/')
+    })
 
     app.get('/start', (req, res) => {
-        const newData = {"id":1};
         prepareQuestions();
         res.redirect('/')
     })
