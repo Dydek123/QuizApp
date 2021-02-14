@@ -22,7 +22,8 @@ const preparePrizeList = (questionIndex) => {
     console.log(prizeDivs[currentQuestion - questionIndex])
     prizeDivs[currentQuestion - questionIndex].classList.add('previous');
     prizeDivs[currentQuestion - questionIndex].classList.remove('current');
-    prizeDivs[currentQuestion - questionIndex -1].classList.add('current');
+    if (currentQuestion > questionIndex)
+        prizeDivs[currentQuestion - questionIndex -1].classList.add('current');
 }
 
 const fillElements = (data) => {
