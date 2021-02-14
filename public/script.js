@@ -20,10 +20,12 @@ const showNextQuestion = () => {
 const preparePrizeList = (questionIndex) => {
     const currentQuestion = prizeDivs.length;
     console.log(prizeDivs[currentQuestion - questionIndex])
-    prizeDivs[currentQuestion - questionIndex].classList.add('previous');
-    prizeDivs[currentQuestion - questionIndex].classList.remove('current');
-    if (currentQuestion > questionIndex)
-        prizeDivs[currentQuestion - questionIndex -1].classList.add('current');
+    if (questionIndex>0) {
+        prizeDivs[currentQuestion - questionIndex].classList.add('previous');
+        prizeDivs[currentQuestion - questionIndex].classList.remove('current');
+        if (currentQuestion > questionIndex)
+            prizeDivs[currentQuestion - questionIndex -1].classList.add('current');
+    }
 }
 
 const fillElements = (data) => {
@@ -64,8 +66,8 @@ const sendAnswer = (answerIndex) => {
         })
         .then(res => res.json())
         .then(data => {
-            preparePrizeList(data.goodAnswers);
             handleAnswerFeedback(data);
+            preparePrizeList(data.goodAnswers);
         })
 }
 
@@ -88,6 +90,8 @@ const callToFriend = () => {
 
 const handleFriendAnswer = (tip) => {
     document.querySelector('#tip').innerText = tip.text;
+    callFriend.disabled = true;
+
 }
 
 const halfOnHaldHelp = () => {
@@ -110,6 +114,7 @@ const handleHalfOnHalf = (tip) => {
             button.style.opacity = 0;
         }
     }
+    halfOnHalf.disabled = true
 }
 
 const questionToTheCrowdHelp = () => {
@@ -129,6 +134,7 @@ const handleQuestionToTheCrowd = (tip) => {
     for (const button of answers) {
         button.innerText += ` (${tip.chart[button.dataset.answer]}%)`
     }
+    questionToTheCrowd.disabled = true;
 }
 
 

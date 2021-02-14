@@ -59,6 +59,12 @@ section article {
   align-items: center;
 }
 
+button {
+  color: #d0efff;
+  border: 2px solid #d0efff;
+  background: transparent;
+}
+
 #lifelines {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -71,9 +77,6 @@ section article {
   margin-left: auto;
   margin-right: auto;
   border-radius: 50%;
-  color: #d0efff;
-  border: 2px solid #d0efff;
-  background: transparent;
   font-weight: 600;
   font-size: 1.5rem;
   width: 5rem;
@@ -139,6 +142,7 @@ section article {
 #answers button {
   background-color: #187bcd;
   border: 2px solid #d0efff;
+  color: black;
   margin-bottom: 1rem;
   width: 48%;
   height: 4rem;
@@ -234,5 +238,10 @@ aside div {
   100% {
     background-position: 0% 50%;
   }
+}
+
+:disabled {
+  color: #ff2600;
+  border: 2px solid #ff2600;
 }
 /*# sourceMappingURL=style.css.map */

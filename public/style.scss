@@ -2,6 +2,8 @@ $darkBLue: #03254c;
 $fillColor: #187bcd;
 $borderColor:#d0efff;
 $fontColor: white;
+$usedLifeline: rgb(255, 38, 0);
+$usedLifelineHover: red;
 $headerHeight:10vh;
 @mixin flexCenter {
     display: flex;
@@ -100,6 +102,12 @@ section {
     }
 }
 
+button {
+    color: $borderColor;
+    border: 2px solid $borderColor;
+    background: transparent;
+}
+
 #lifelines {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -110,9 +118,9 @@ section {
         margin-left: auto;
         margin-right: auto;
         border-radius: 50%;
-        color: $borderColor;
-        border: 2px solid $borderColor;
-        background: transparent;
+        // color: $borderColor;
+        // border: 2px solid $borderColor;
+        // background: transparent;
         font-weight: 600;
         font-size: 1.5rem;
         width: 5rem;
@@ -152,6 +160,7 @@ section {
     height: 30vh;
     button {
         @include backgroundWithBorder();
+        color: black;
         margin-bottom: 1rem;
         width: 48%;
         height: 4rem;
@@ -198,4 +207,9 @@ aside {
 
 .previous {
     @include prizeDiv(linear-gradient(-45deg, #5ce925, $borderColor, #5ce925, #26920b));
+}
+
+:disabled {
+    color: $usedLifeline;
+    border: 2px solid $usedLifeline;
 }

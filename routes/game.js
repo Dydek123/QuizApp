@@ -56,7 +56,6 @@ const gameRoute = app =>{
 
     app.get('/reset', (req, res) => {
         goodAnswers = 0 ;
-        prepareQuestions();
         res.redirect('/')
     })
 
@@ -71,6 +70,7 @@ const gameRoute = app =>{
                 winner: true,
             });
         }else if(gameOver){
+            prepareQuestions();
             res.json({
                 loser:true,
             })
