@@ -24,6 +24,9 @@ section {
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  width: 90vw;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 section article {
@@ -170,5 +173,66 @@ footer {
   font-size: 1.5rem;
   font-weight: 600;
   color: white;
+}
+
+aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 5vw;
+  height: 75vh;
+  width: 30vw;
+  margin-bottom: 5vh;
+}
+
+aside div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 3rem;
+  background: #8a8484;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.current {
+  background: linear-gradient(-45deg, #c9c619, #d0efff, #c9c619, #eeba0e);
+  background-size: 400% 400%;
+  animation: gradient 8s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.quaranteed {
+  border: 2px solid red;
+}
+
+.previous {
+  background: linear-gradient(-45deg, #5ce925, #d0efff, #5ce925, #26920b);
+  background-size: 400% 400%;
+  animation: gradient 8s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 /*# sourceMappingURL=style.css.map */

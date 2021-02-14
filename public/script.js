@@ -5,6 +5,7 @@ const h2 = document.querySelector('h2');
 const callFriend = document.querySelector('#callToFriend');
 const halfOnHalf = document.querySelector('#halfOnHlf');
 const questionToTheCrowd = document.querySelector('#questionToTheCrowd');
+const prizeDivs = document.querySelectorAll('aside div');
 
 const showNextQuestion = () => {
     fetch('/question', {
@@ -16,9 +17,19 @@ const showNextQuestion = () => {
         });
 }
 
+const preparePrizeList = (questionIndex) => {
+    const currentQuestion = prizeDivs.length;
+    console.log(prizeDivs[currentQuestion - questionIndex])
+    prizeDivs[currentQuestion - questionIndex].classList.add('previous');
+    prizeDivs[currentQuestion - questionIndex].classList.remove('current');
+    prizeDivs[currentQuestion - questionIndex -1].classList.add('current');
+}
+
 const fillElements = (data) => {
     if (data.winner === true) {
-        h2.innerText = 'WYGRAŁAŚ/EŚ!!!'
+        h2.innerText = 'WYGRAŁAŚ/EŚ!!!';
+        h2.style.height = '50%';
+        resetButton.style.display = 'flex';
         return;
     } else if (data.loser === true) {
         h2.innerText = 'Tym razem się nie udało, spróbuj ponownie';
@@ -30,6 +41,7 @@ const fillElements = (data) => {
     for (const button of answers) {
         button.style.opacity = 1;
     }
+    console.log(data)
     document.querySelector('#tip').innerText = '';
     question.innerText = data.question;
     document.querySelector('#category').innerText = data.category;
@@ -51,6 +63,7 @@ const sendAnswer = (answerIndex) => {
         })
         .then(res => res.json())
         .then(data => {
+            preparePrizeList(data.goodAnswers);
             handleAnswerFeedback(data);
         })
 }

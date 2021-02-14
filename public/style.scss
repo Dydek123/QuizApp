@@ -33,6 +33,23 @@ $headerHeight:10vh;
     }
 }
 
+@mixin prizeDiv($color) {
+    background: $color;
+    background-size: 400% 400%;
+    animation: gradient 8s ease infinite;
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+}
+
 * {
     margin: 0;
 }
@@ -55,6 +72,9 @@ header {
 section {
     @include flexCenter();
     flex-direction: row;
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
     article {
         height: 100vh - 2*$headerHeight;
         width: 50vw;
@@ -148,4 +168,34 @@ footer {
     font-size: 1.5rem;
     font-weight: 600;
     color: white;
+}
+
+aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 5vw;
+    height: 75vh;
+    width: 30vw;
+    margin-bottom: 5vh;
+    div {
+        @include flexCenter();
+        width: 100%;
+        height: 3rem;
+        background: #8a8484;
+        border-radius: 10px;
+        font-weight: 600;
+    }
+}
+
+.current {
+    @include prizeDiv(linear-gradient(-45deg, #c9c619, $borderColor, #c9c619, #eeba0e));
+}
+
+.quaranteed {
+    border: 2px solid red;
+}
+
+.previous {
+    @include prizeDiv(linear-gradient(-45deg, #5ce925, $borderColor, #5ce925, #26920b));
 }
