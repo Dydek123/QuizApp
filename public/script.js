@@ -32,12 +32,12 @@ const fillElements = (data) => {
     if (data.winner === true) {
         h2.innerText = 'WYGRAŁAŚ/EŚ!!!';
         h2.style.height = '50%';
-        resetButton.style.display = 'flex';
+        setTimeout(function(){ resetButton.style.display = 'flex' }, 1000);
         return;
     } else if (data.loser === true) {
         h2.innerText = 'Tym razem się nie udało, spróbuj ponownie';
         h2.style.height = '50%';
-        resetButton.style.display = 'flex';
+        setTimeout(function(){ resetButton.style.display = 'flex' }, 1000);
         return;
 
     }

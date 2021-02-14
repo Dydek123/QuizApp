@@ -35,7 +35,7 @@ $headerHeight:10vh;
     }
 }
 
-@mixin prizeDiv($color) {
+@mixin backgroundAnimation($color) {
     background: $color;
     background-size: 400% 400%;
     animation: gradient 8s ease infinite;
@@ -137,7 +137,7 @@ button {
 }
 
 #reset {
-    @include buttonHover();
+    @include backgroundAnimation(linear-gradient(-45deg, #c9c619, $borderColor, #c9c619, #eeba0e));
     @include flexCenter();
     @include backgroundWithBorder();
     text-decoration: none;
@@ -198,7 +198,7 @@ aside {
 }
 
 .current {
-    @include prizeDiv(linear-gradient(-45deg, #c9c619, $borderColor, #c9c619, #eeba0e));
+    @include backgroundAnimation(linear-gradient(-45deg, #c9c619, $borderColor, #c9c619, #eeba0e));
 }
 
 .quaranteed {
@@ -206,7 +206,7 @@ aside {
 }
 
 .previous {
-    @include prizeDiv(linear-gradient(-45deg, #5ce925, $borderColor, #5ce925, #26920b));
+    @include backgroundAnimation(linear-gradient(-45deg, #5ce925, $borderColor, #5ce925, #26920b));
 }
 
 :disabled {

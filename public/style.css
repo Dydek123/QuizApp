@@ -96,6 +96,9 @@ button {
 }
 
 #reset {
+  background: linear-gradient(-45deg, #c9c619, #d0efff, #c9c619, #eeba0e);
+  background-size: 400% 400%;
+  animation: gradient 8s ease infinite;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -109,12 +112,6 @@ button {
   height: 3rem;
   margin-bottom: 10%;
   display: none;
-}
-
-#reset:hover {
-  background: linear-gradient(-45deg, #54a5f1, #d0efff, #54a5f1, #187bcd);
-  background-size: 400% 400%;
-  animation: gradient 8s ease infinite;
 }
 
 @keyframes gradient {
