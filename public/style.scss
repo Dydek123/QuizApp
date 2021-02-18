@@ -167,6 +167,8 @@ button {
         height: 4rem;
         font-size: 1.2rem;
         border-radius: 10px;
+    }
+    .hoverButton {
         @include buttonHover();
     }
 }

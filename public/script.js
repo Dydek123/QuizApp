@@ -35,7 +35,9 @@ const fillElements = (data) => {
         return;
     } else if (data.loser === true) {
         answers[data.publicAnswer.correctAnswer].classList.add('correctAnswer');
+        answers[data.publicAnswer.correctAnswer].classList.remove('hoverButton');
         answers[data.publicAnswer.playerAnswer].classList.add('wrongAnswer');
+        answers[data.publicAnswer.playerAnswer].classList.remove('hoverButton');
         h2.innerText = 'Tym razem się nie udało, spróbuj ponownie';
         h2.style.height = '50%';
         setTimeout(function(){ resetButton.style.display = 'flex' }, 2000);

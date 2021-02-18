@@ -148,7 +148,7 @@ button {
   border-radius: 10px;
 }
 
-#answers button:hover {
+#answers .hoverButton:hover {
   background: linear-gradient(-45deg, #54a5f1, #d0efff, #54a5f1, #187bcd);
   background-size: 400% 400%;
   animation: gradient 8s ease infinite;
