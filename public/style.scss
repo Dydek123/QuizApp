@@ -106,6 +106,7 @@ button {
     color: $borderColor;
     border: 2px solid $borderColor;
     background: transparent;
+    cursor: pointer;
 }
 
 #lifelines {
@@ -207,6 +208,14 @@ aside {
 
 .previous {
     @include backgroundAnimation(linear-gradient(-45deg, #5ce925, $borderColor, #5ce925, #26920b));
+}
+
+.correctAnswer {
+    @include backgroundAnimation(linear-gradient(-45deg, #5ce925, $borderColor, #5ce925, #26920b));
+}
+
+.wrongAnswer {
+    @include backgroundAnimation(linear-gradient(-45deg, $usedLifeline, $borderColor, #641f1f, #d40909));
 }
 
 :disabled {

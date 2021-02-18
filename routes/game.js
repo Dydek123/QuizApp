@@ -28,6 +28,7 @@ const replaceBadString = (data) => {
 
 const gameRoute = app =>{
     let goodAnswers = 0;
+    let publicAnswer = {};
     let gameOver = false;
     let callToAFriendUsed = false;
     let questionToTheCrowdUsed = false;
@@ -73,13 +74,24 @@ const gameRoute = app =>{
             prepareQuestions();
             res.json({
                 loser:true,
+                publicAnswer
             })
         } else {
-            const nextQuestion = questions[goodAnswers];
-            const {question, answers, category} = nextQuestion;
-            res.json({
-                question, answers, category,
-            })
+            if (goodAnswers!==0) {
+                setTimeout(() => {
+                    const nextQuestion = questions[goodAnswers];
+                    const {question, answers, category} = nextQuestion;
+                    res.json({
+                        question, answers, category,
+                    })
+                }, 1000)
+            } else {
+                const nextQuestion = questions[goodAnswers];
+                const {question, answers, category} = nextQuestion;
+                res.json({
+                    question, answers, category,
+                })
+            }
         }
     });
 
@@ -90,16 +102,15 @@ const gameRoute = app =>{
         const {index} = req.params;
         const currentQuestion = questions[goodAnswers];
         const correctAnswer = currentQuestion.correctAnswer === Number(index);
-
         if (correctAnswer){
             goodAnswers++;
         } else{
             gameOver = true;
+            publicAnswer = {correctAnswer: currentQuestion.correctAnswer, playerAnswer:Number(index)};
         }
-
         res.json({
             correct : currentQuestion.correctAnswer === Number(index),
-            goodAnswers,
+            goodAnswers
         })
     })
 

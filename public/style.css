@@ -63,6 +63,7 @@ button {
   color: #d0efff;
   border: 2px solid #d0efff;
   background: transparent;
+  cursor: pointer;
 }
 
 #lifelines {
@@ -221,6 +222,42 @@ aside div {
 
 .previous {
   background: linear-gradient(-45deg, #5ce925, #d0efff, #5ce925, #26920b);
+  background-size: 400% 400%;
+  animation: gradient 8s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.correctAnswer {
+  background: linear-gradient(-45deg, #5ce925, #d0efff, #5ce925, #26920b);
+  background-size: 400% 400%;
+  animation: gradient 8s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.wrongAnswer {
+  background: linear-gradient(-45deg, #ff2600, #d0efff, #641f1f, #d40909);
   background-size: 400% 400%;
   animation: gradient 8s ease infinite;
 }

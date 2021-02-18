@@ -19,7 +19,6 @@ const showNextQuestion = () => {
 
 const preparePrizeList = (questionIndex) => {
     const currentQuestion = prizeDivs.length;
-    console.log(prizeDivs[currentQuestion - questionIndex])
     if (questionIndex>0) {
         prizeDivs[currentQuestion - questionIndex].classList.add('previous');
         prizeDivs[currentQuestion - questionIndex].classList.remove('current');
@@ -35,6 +34,8 @@ const fillElements = (data) => {
         setTimeout(function(){ resetButton.style.display = 'flex' }, 1000);
         return;
     } else if (data.loser === true) {
+        answers[data.publicAnswer.correctAnswer].classList.add('correctAnswer');
+        answers[data.publicAnswer.playerAnswer].classList.add('wrongAnswer');
         h2.innerText = 'Tym razem się nie udało, spróbuj ponownie';
         h2.style.height = '50%';
         setTimeout(function(){ resetButton.style.display = 'flex' }, 1000);
