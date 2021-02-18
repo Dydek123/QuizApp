@@ -29,7 +29,7 @@ const preparePrizeList = (questionIndex) => {
 
 const fillElements = (data) => {
     if (data.winner === true) {
-        h2.innerText = 'WYGRAŁAŚ/EŚ!!!';
+        h2.innerText = 'You are MILIONAIRE';
         h2.style.height = '50%';
         setTimeout(function(){ resetButton.style.display = 'flex' }, 2000);
         return;
@@ -38,7 +38,14 @@ const fillElements = (data) => {
         answers[data.publicAnswer.correctAnswer].classList.remove('hoverButton');
         answers[data.publicAnswer.playerAnswer].classList.add('wrongAnswer');
         answers[data.publicAnswer.playerAnswer].classList.remove('hoverButton');
-        h2.innerText = 'Tym razem się nie udało, spróbuj ponownie';
+        if (data.goodAnswers <2){
+            h2.innerText = 'You won 0 €';
+        }
+        else if (data.goodAnswers >= 2){
+            h2.innerText = 'You won 1 000 €';
+        } else if(data.goodAnswers >= 7){
+            h2.innerText = 'You won 40 000 €';
+        }
         h2.style.height = '50%';
         setTimeout(function(){ resetButton.style.display = 'flex' }, 2000);
         return;

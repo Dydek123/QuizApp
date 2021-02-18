@@ -74,7 +74,8 @@ const gameRoute = app =>{
             prepareQuestions();
             res.json({
                 loser:true,
-                publicAnswer
+                publicAnswer,
+                goodAnswers,
             })
         } else {
             if (goodAnswers!==0) {
