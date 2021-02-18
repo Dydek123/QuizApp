@@ -19,6 +19,10 @@ header {
   align-items: center;
 }
 
+.hamburger {
+  display: none;
+}
+
 section {
   display: flex;
   justify-content: center;
@@ -198,6 +202,10 @@ aside div {
   font-weight: 600;
 }
 
+.closeAside {
+  display: none;
+}
+
 .current {
   background: linear-gradient(-45deg, #c9c619, #d0efff, #c9c619, #eeba0e);
   background-size: 400% 400%;
@@ -277,5 +285,83 @@ aside div {
 :disabled {
   color: #ff2600;
   border: 2px solid #ff2600;
+}
+
+@media (max-width: 992px) {
+  header {
+    width: 95%;
+  }
+  header h1 {
+    text-align: center;
+    width: 90%;
+    font-size: 1.4em;
+  }
+  .hamburger {
+    display: inline-block;
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  section {
+    width: 95vw;
+  }
+  section article {
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #answers button {
+    font-size: 1rem;
+  }
+  #questionBoard h2 {
+    font-size: 1.3rem;
+  }
+  #lifelines button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    font-size: 1.2rem;
+  }
+  footer {
+    font-size: 1.1rem;
+  }
+  aside {
+    position: absolute;
+    background: url(https://media.giphy.com/media/W5GyJBpRgszhm/giphy.gif);
+    padding: 0;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    transition: left ease-in-out 1s;
+  }
+  aside div {
+    height: 5%;
+    width: 80%;
+  }
+  aside div:first-child {
+    margin-top: 1rem;
+  }
+  aside div:last-child {
+    margin-bottom: 1rem;
+  }
+  .closeAside {
+    display: flex;
+    width: 10%;
+    height: 2rem;
+    align-self: flex-end;
+    margin-right: 10%;
+    background: coral;
+  }
+  .show {
+    left: 0;
+  }
+  .hide {
+    left: 100vw;
+  }
 }
 /*# sourceMappingURL=style.css.map */

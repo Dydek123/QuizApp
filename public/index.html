@@ -9,12 +9,16 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/57045c6330.js" crossorigin="anonymous"></script>
     <script src="script.js" defer></script>
+    <script src="hamburger.js" defer></script>
 </head>
 
 <body>
     <div id="container">
         <header>
-            <h1 id="category">Millionaires</h1>
+            <h1 id="category"></h1>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
         </header>
         <section>
             <article>
@@ -35,7 +39,8 @@
                     <button id="answer4" class="answerButton hoverButton" data-answer="3">D</button>
                 </div>
             </article>
-            <aside>
+            <aside class="hide">
+                <div class="closeAside"><i class="fas fa-times"></i></div>
                 <div>1 000 000</div>
                 <div>500 000</div>
                 <div>250 000</div>
