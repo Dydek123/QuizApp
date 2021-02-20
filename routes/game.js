@@ -56,22 +56,30 @@ const gameRoute = app =>{
     })
 
     app.get('/reset', (req, res) => {
-        goodAnswers = 0 ;
-        res.redirect('/')
+        goodAnswers = 0;
+        gameOver = false;
+        callToAFriendUsed = false;
+        questionToTheCrowdUsed = false;
+        halfOnHalfUsed = false;
+        const nextQuestion = questions[goodAnswers];
+        const {question, answers, category} = nextQuestion;
+        res.json({
+            question, answers, category, goodAnswers, loser:false
+        })
     })
 
     app.get('/start', (req, res) => {
-        prepareQuestions();
+        // prepareQuestions();
         res.redirect('/')
     })
 
     app.get('/question', (req, res) => {
-        if(goodAnswers === questions.length){
+        if(goodAnswers === 12){
             res.json({
                 winner: true,
             });
         }else if(gameOver){
-            prepareQuestions();
+            // prepareQuestions();
             res.json({
                 loser:true,
                 publicAnswer,
@@ -83,14 +91,14 @@ const gameRoute = app =>{
                     const nextQuestion = questions[goodAnswers];
                     const {question, answers, category} = nextQuestion;
                     res.json({
-                        question, answers, category,
+                        question, answers, category, goodAnswers,
                     })
                 }, 1000)
             } else {
                 const nextQuestion = questions[goodAnswers];
                 const {question, answers, category} = nextQuestion;
                 res.json({
-                    question, answers, category,
+                    question, answers, category, goodAnswers,
                 })
             }
         }
@@ -118,21 +126,21 @@ const gameRoute = app =>{
     app.get('/help/friend', (req,res) =>{
         if(callToAFriendUsed){
             return res.json({
-                text: 'To koło ratunkowe zostało już wykorzystane',
+                text: 'This lifeline has already been used',
             })
         }
         callToAFriendUsed = true;
         const doesFriendKnowAnswer = Math.random() < 0.5;
         const question = questions[goodAnswers];
         res.json({
-            text: doesFriendKnowAnswer?`Wydaję mi się, że odpowiedź to ${question.answers[question.correctAnswer]}` : `Niestety nie wiem`
+            text: doesFriendKnowAnswer?`I think it is ${question.answers[question.correctAnswer]}` : `Unfortunately, I do not know`
         })
     });
 
     app.get('/help/halfOnHalf', (req, res) => {
         if (halfOnHalfUsed){
             return res.json({
-                text: 'To koło ratunkowe zostało już wykorzystane',
+                text: 'This lifeline has already been used',
             })
         }
         halfOnHalfUsed = true;

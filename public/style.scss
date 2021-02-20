@@ -16,7 +16,8 @@ $headerHeight:10vh;
 }
 
 @mixin backgroundWithBorder {
-    background-color: $fillColor;
+    background: rgb(54, 89, 171);
+    background: linear-gradient(90deg, rgba(54, 89, 171, 1) 0%, rgba(24, 123, 205, 1) 50%, rgba(54, 89, 171, 1) 100%);
     border: 2px solid $borderColor;
 }
 
@@ -149,7 +150,6 @@ button {
 #reset {
     @include backgroundAnimation(linear-gradient(-45deg, #c9c619, $borderColor, #c9c619, #eeba0e));
     @include flexCenter();
-    @include backgroundWithBorder();
     text-decoration: none;
     color: black;
     font-weight: 600;

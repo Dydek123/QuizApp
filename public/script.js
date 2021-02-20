@@ -17,6 +17,26 @@ const showNextQuestion = () => {
         });
 }
 
+const resetGame = (data) => {
+    answers[data.publicAnswer.correctAnswer].classList.remove('correctAnswer');
+    answers[data.publicAnswer.correctAnswer].classList.add('hoverButton');
+    answers[data.publicAnswer.playerAnswer].classList.remove('wrongAnswer');
+    answers[data.publicAnswer.playerAnswer].classList.add('hoverButton');
+    h2.style.height = '85%';
+    callFriend.disabled = false;
+    questionToTheCrowd.disabled = false;
+    halfOnHalf.disabled = false;
+    resetButton.style.display = 'none';
+
+    fetch('/reset', {
+        method: 'GET',
+    })
+        .then(data => data.json())
+        .then(data => {
+            fillElements(data)
+        });
+}
+
 const preparePrizeList = (questionIndex) => {
     const currentQuestion = prizeDivs.length;
     if (questionIndex>0) {
@@ -27,10 +47,17 @@ const preparePrizeList = (questionIndex) => {
     }
 }
 
+const clearPrizeList = (questionIndex) => {
+    const length = prizeDivs.length-1;
+    prizeDivs[length - questionIndex].classList.remove('current');
+    prizeDivs[length].classList.add('current');
+    for(let i = length ; i>length-questionIndex ; i--)
+        prizeDivs[i].classList.remove('previous')
+}
+
 const fillElements = (data) => {
     if (data.winner === true) {
         h2.innerText = 'You are MILIONAIRE';
-        h2.style.height = '50%';
         setTimeout(function(){ resetButton.style.display = 'flex' }, 2000);
         return;
     } else if (data.loser === true) {
@@ -38,6 +65,10 @@ const fillElements = (data) => {
         answers[data.publicAnswer.correctAnswer].classList.remove('hoverButton');
         answers[data.publicAnswer.playerAnswer].classList.add('wrongAnswer');
         answers[data.publicAnswer.playerAnswer].classList.remove('hoverButton');
+        resetButton.addEventListener('click', () => {
+            clearPrizeList(data.goodAnswers)
+            resetGame(data)
+        })
         if (data.goodAnswers <2){
             h2.innerText = 'You won 0 €';
         }
@@ -46,7 +77,6 @@ const fillElements = (data) => {
         } else if(data.goodAnswers >= 7){
             h2.innerText = 'You won 40 000 €';
         }
-        h2.style.height = '50%';
         setTimeout(function(){ resetButton.style.display = 'flex' }, 2000);
         return;
 

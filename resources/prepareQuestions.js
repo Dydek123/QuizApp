@@ -3,7 +3,7 @@ const fs = require('fs');
 
 const prepareQuestions = () => {
     const fetch = require("node-fetch");
-    fetch('https://opentdb.com/api.php?amount=12&type=multiple')
+    fetch('https://opentdb.com/api.php?amount=100&type=multiple')
         .then(res => res.json())
         .then(json => {
             fs.writeFile("./resources/questions.json", JSON.stringify(json), function(err) {
