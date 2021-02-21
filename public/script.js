@@ -72,9 +72,10 @@ const fillElements = (data) => {
         if (data.goodAnswers <2){
             h2.innerText = 'You won 0 €';
         }
-        else if (data.goodAnswers >= 2){
+        if (data.goodAnswers >= 2 && data.goodAnswers <7){
             h2.innerText = 'You won 1 000 €';
-        } else if(data.goodAnswers >= 7){
+        }
+        if(data.goodAnswers >= 7){
             h2.innerText = 'You won 40 000 €';
         }
         setTimeout(function(){ resetButton.style.display = 'flex' }, 2000);

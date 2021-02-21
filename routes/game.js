@@ -29,6 +29,8 @@ const replaceBadString = (data) => {
 const gameRoute = app =>{
     let goodAnswers = 0;
     let publicAnswer = {};
+    let questionsInCurrentGame = [];
+    let questionIndex = 0;
     let gameOver = false;
     let callToAFriendUsed = false;
     let questionToTheCrowdUsed = false;
@@ -61,7 +63,16 @@ const gameRoute = app =>{
         callToAFriendUsed = false;
         questionToTheCrowdUsed = false;
         halfOnHalfUsed = false;
-        const nextQuestion = questions[goodAnswers];
+        questionsInCurrentGame.length = 0;
+
+        questionIndex =  Math.floor(Math.random() * 51);
+        while (questionsInCurrentGame.includes(questionIndex)){
+            questionIndex =  Math.floor(Math.random() * 51)
+        }
+        console.log(questionIndex)
+        console.log(questionsInCurrentGame)
+        questionsInCurrentGame.push(questionIndex);
+        const nextQuestion = questions[questionIndex];
         const {question, answers, category} = nextQuestion;
         res.json({
             question, answers, category, goodAnswers, loser:false
@@ -88,14 +99,29 @@ const gameRoute = app =>{
         } else {
             if (goodAnswers!==0) {
                 setTimeout(() => {
-                    const nextQuestion = questions[goodAnswers];
+                    questionIndex =  Math.floor(Math.random() * 51);
+                    while (questionsInCurrentGame.includes(questionIndex)){
+                        questionIndex =  Math.floor(Math.random() * 51)
+                    }
+                    console.log(questionIndex)
+                    console.log(questionsInCurrentGame)
+                    questionsInCurrentGame.push(questionIndex);
+                    const nextQuestion = questions[questionIndex];
                     const {question, answers, category} = nextQuestion;
                     res.json({
                         question, answers, category, goodAnswers,
                     })
                 }, 1000)
             } else {
-                const nextQuestion = questions[goodAnswers];
+                questionIndex =  Math.floor(Math.random() * 51);
+                while (questionsInCurrentGame.includes(questionIndex)){
+                    questionIndex =  Math.floor(Math.random() * 51)
+                }
+                console.log('long : '+questions.length)
+                console.log(questionIndex)
+                console.log(questionsInCurrentGame)
+                questionsInCurrentGame.push(questionIndex);
+                const nextQuestion = questions[questionIndex];
                 const {question, answers, category} = nextQuestion;
                 res.json({
                     question, answers, category, goodAnswers,
@@ -109,7 +135,7 @@ const gameRoute = app =>{
             return res.json({loser:true});
 
         const {index} = req.params;
-        const currentQuestion = questions[goodAnswers];
+        const currentQuestion = questions[questionIndex];
         const correctAnswer = currentQuestion.correctAnswer === Number(index);
         if (correctAnswer){
             goodAnswers++;
@@ -131,7 +157,9 @@ const gameRoute = app =>{
         }
         callToAFriendUsed = true;
         const doesFriendKnowAnswer = Math.random() < 0.5;
-        const question = questions[goodAnswers];
+        const question = questions[questionIndex];
+        // console.log(question)
+        // console.log('index' + questionIndex)
         res.json({
             text: doesFriendKnowAnswer?`I think it is ${question.answers[question.correctAnswer]}` : `Unfortunately, I do not know`
         })
@@ -144,7 +172,7 @@ const gameRoute = app =>{
             })
         }
         halfOnHalfUsed = true;
-        const question = questions[goodAnswers];
+        const question = questions[questionIndex];
         let secondOption = Math.floor(Math.random() * 4)
         while (secondOption === Number(question.correctAnswer)){
             secondOption = Math.floor(Math.random() * 4)
@@ -170,7 +198,7 @@ const gameRoute = app =>{
             chart[i - 1] -= changeRate;
         };
 
-        const question = questions[goodAnswers];
+        const question = questions[questionIndex];
         const {correctAnswer} = question;
 
         [chart[3], chart[correctAnswer]] = [chart[correctAnswer], chart[3]];

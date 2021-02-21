@@ -108,6 +108,8 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #187bcd;
+  border: 2px solid #d0efff;
   text-decoration: none;
   color: black;
   font-weight: 600;
@@ -141,8 +143,7 @@ button {
 }
 
 #answers button {
-  background: #3659ab;
-  background: linear-gradient(90deg, #3659ab 0%, #187bcd 50%, #3659ab 100%);
+  background-color: #187bcd;
   border: 2px solid #d0efff;
   color: black;
   margin-bottom: 1rem;
