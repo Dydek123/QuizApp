@@ -57,8 +57,9 @@ section article {
 }
 
 #questionBoard h2 {
+  color: white;
+  font-weight: 700;
   font-size: 1.5rem;
-  font-weight: 400;
   height: 85%;
   padding: 0 2rem;
   display: flex;
@@ -147,7 +148,8 @@ button {
 #answers button {
   background-color: #187bcd;
   border: 2px solid #d0efff;
-  color: black;
+  color: white;
+  font-weight: 700;
   margin-bottom: 1rem;
   width: 48%;
   height: 4rem;
@@ -185,6 +187,7 @@ aside div {
   background: #8a8484;
   border-radius: 10px;
   font-weight: 600;
+  letter-spacing: 2px;
 }
 
 .closeAside {
@@ -274,6 +277,7 @@ aside div {
 
 @media (min-width: 992px) {
   #answers .hoverButton:hover {
+    color: black;
     background: linear-gradient(-45deg, #54a5f1, #d0efff, #54a5f1, #187bcd);
     background-size: 400% 400%;
     animation: gradient 8s ease infinite;

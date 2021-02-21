@@ -15,16 +15,22 @@ const shuffle = array => {
 }
 
 const drawQuestion = (questionsInCurrentGame) => {
-    let questionIndex =  Math.floor(Math.random() * 51);
-    while (questionsInCurrentGame.includes(questionIndex)){
-        questionIndex =  Math.floor(Math.random() * 51)
+    let {questionIndex, answer} = questionsInCurrentGame.pop() || {questionIndex:0,  answer:true};
+    if(answer){
+        questionIndex =  Math.floor(Math.random() * 51);
+        while (questionsInCurrentGame.includes(questionIndex)){
+            questionIndex =  Math.floor(Math.random() * 51)
+        }
     }
+    console.log(questionIndex)
     return questionIndex;
 }
 
 const replaceBadString = (data) => {
     data = data.split("&quot;").join("'")
     data = data.split("&#039;").join("'")
+    data = data.split("&euml;").join("ë")
+    data = data.split("&amp;").join("&")
     return data;
 }
 
@@ -64,9 +70,8 @@ const gameRoute = app =>{
         questionToTheCrowdUsed = false;
         halfOnHalfUsed = false;
         questionsInCurrentGame.length = 0;
-
         questionIndex  = drawQuestion(questionsInCurrentGame);
-        questionsInCurrentGame.push(questionIndex);
+        questionsInCurrentGame.push({questionIndex, answer:false});
         const nextQuestion = questions[questionIndex];
         const {question, answers, category} = nextQuestion;
         res.json({
@@ -94,8 +99,8 @@ const gameRoute = app =>{
             if (goodAnswers!==0) {
                 setTimeout(() => {
                     questionIndex  = drawQuestion(questionsInCurrentGame);
-                    questionsInCurrentGame.push(questionIndex);
                     const nextQuestion = questions[questionIndex];
+                    questionsInCurrentGame.push({questionIndex, answer:false});
                     const {question, answers, category} = nextQuestion;
                     res.json({
                         question, answers, category, goodAnswers,
@@ -103,8 +108,8 @@ const gameRoute = app =>{
                 }, 1000)
             } else {
                 questionIndex  = drawQuestion(questionsInCurrentGame);
-                questionsInCurrentGame.push(questionIndex);
                 const nextQuestion = questions[questionIndex];
+                questionsInCurrentGame.push({questionIndex, answer:false});
                 const {question, answers, category} = nextQuestion;
                 res.json({
                     question, answers, category, goodAnswers,
@@ -123,6 +128,9 @@ const gameRoute = app =>{
         const correctAnswer = currentQuestion.correctAnswer === Number(index);
         if (correctAnswer){
             goodAnswers++;
+            let {questionIndex, answer} = questionsInCurrentGame.pop();
+            answer = true;
+            questionsInCurrentGame.push({questionIndex, answer});
         } else{
             gameOver = true;
             publicAnswer = {correctAnswer: currentQuestion.correctAnswer, playerAnswer:Number(index)};
