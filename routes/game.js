@@ -3,21 +3,23 @@ const prepareQuestions = require('../resources/prepareQuestions');
 
 const shuffle = array => {
     let currentIndex = array.length, temporaryValue, randomIndex;
-
-    // While there remain elements to shuffle...
     while (0 !== currentIndex) {
-
-        // Pick a remaining element...
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
 
-        // And swap it with the current element.
         temporaryValue = array[currentIndex];
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
     return array;
+}
+
+const drawQuestion = (questionsInCurrentGame) => {
+    let questionIndex =  Math.floor(Math.random() * 51);
+    while (questionsInCurrentGame.includes(questionIndex)){
+        questionIndex =  Math.floor(Math.random() * 51)
+    }
+    return questionIndex;
 }
 
 const replaceBadString = (data) => {
@@ -37,14 +39,12 @@ const gameRoute = app =>{
     let halfOnHalfUsed = false;
 
     let questions= [];
-
     fs.readFile('./resources/questions.json','utf-8',(err,data) => {
         if (err)
             return console.log(err);
         let arr = [];
         data = replaceBadString(data);
         const apiQuestions = JSON.parse(data);
-        // const {category, type, difficulty, question, correct_answer, incorrect_answers} = questions.results[0]
         for (const question of apiQuestions.results) {
             let answers = question.incorrect_answers;
             answers.push(question.correct_answer);
@@ -65,12 +65,7 @@ const gameRoute = app =>{
         halfOnHalfUsed = false;
         questionsInCurrentGame.length = 0;
 
-        questionIndex =  Math.floor(Math.random() * 51);
-        while (questionsInCurrentGame.includes(questionIndex)){
-            questionIndex =  Math.floor(Math.random() * 51)
-        }
-        console.log(questionIndex)
-        console.log(questionsInCurrentGame)
+        questionIndex  = drawQuestion(questionsInCurrentGame);
         questionsInCurrentGame.push(questionIndex);
         const nextQuestion = questions[questionIndex];
         const {question, answers, category} = nextQuestion;
@@ -90,7 +85,6 @@ const gameRoute = app =>{
                 winner: true,
             });
         }else if(gameOver){
-            // prepareQuestions();
             res.json({
                 loser:true,
                 publicAnswer,
@@ -99,12 +93,7 @@ const gameRoute = app =>{
         } else {
             if (goodAnswers!==0) {
                 setTimeout(() => {
-                    questionIndex =  Math.floor(Math.random() * 51);
-                    while (questionsInCurrentGame.includes(questionIndex)){
-                        questionIndex =  Math.floor(Math.random() * 51)
-                    }
-                    console.log(questionIndex)
-                    console.log(questionsInCurrentGame)
+                    questionIndex  = drawQuestion(questionsInCurrentGame);
                     questionsInCurrentGame.push(questionIndex);
                     const nextQuestion = questions[questionIndex];
                     const {question, answers, category} = nextQuestion;
@@ -113,13 +102,7 @@ const gameRoute = app =>{
                     })
                 }, 1000)
             } else {
-                questionIndex =  Math.floor(Math.random() * 51);
-                while (questionsInCurrentGame.includes(questionIndex)){
-                    questionIndex =  Math.floor(Math.random() * 51)
-                }
-                console.log('long : '+questions.length)
-                console.log(questionIndex)
-                console.log(questionsInCurrentGame)
+                questionIndex  = drawQuestion(questionsInCurrentGame);
                 questionsInCurrentGame.push(questionIndex);
                 const nextQuestion = questions[questionIndex];
                 const {question, answers, category} = nextQuestion;
@@ -127,6 +110,7 @@ const gameRoute = app =>{
                     question, answers, category, goodAnswers,
                 })
             }
+            console.log(questionsInCurrentGame)
         }
     });
 

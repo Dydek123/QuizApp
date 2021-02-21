@@ -5,6 +5,10 @@ $fontColor: white;
 $usedLifeline: rgb(255, 38, 0);
 $usedLifelineHover: red;
 $headerHeight:10vh;
+$categoryFont:'Akaya Telivigala',
+cursive;
+$mainFont: 'Lato',
+sans-serif;
 @mixin flexCenter {
     display: flex;
     justify-content: center;
@@ -79,6 +83,7 @@ $headerHeight:10vh;
 header {
     height: $headerHeight;
     color: $fontColor;
+    font-family: $categoryFont;
     @include flexCenter();
 }
 
@@ -92,6 +97,7 @@ section {
     width: 90vw;
     margin-left: auto;
     margin-right: auto;
+    font-family: $mainFont;
     article {
         height: 100vh - 2*$headerHeight;
         width: 50vw;
@@ -183,9 +189,6 @@ button {
         font-size: 1.2rem;
         border-radius: 10px;
     }
-    .hoverButton {
-        @include buttonHover();
-    }
 }
 
 footer {
@@ -245,6 +248,14 @@ aside {
 }
 
 // MEDIA QUERIES
+@media (min-width: 992px) {
+    #answers {
+        .hoverButton {
+            @include buttonHover();
+        }
+    }
+}
+
 @media (max-width: 992px) {
     header {
         width: 95%;
