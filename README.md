@@ -1,4 +1,4 @@
-# Document your work
+# QuizzApp - Who Wants to Be a Millionaire?
 A webapp based on popular television game show _["Who Wants to Be a Millionaire?"](https://en.wikipedia.org/wiki/Who_Wants_to_Be_a_Millionaire%3F)_ using _[Open Trivia API](https://opentdb.com/api_config.php)_. The game involves answering questions, for each good question the prize will increase up to 12 good answers which is main prize
 
 ## Table of contents
