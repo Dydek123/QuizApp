@@ -16,6 +16,9 @@ The main goal of creating this application was to test the acquired knowledge wi
 * Node.js
 * Express
 
+## Live demo
+[Millionaires](https://millionaires-quiz.herokuapp.com/)
+
 ## Setup
 * Clone this repo to your desktop
 * Run `npm install` to install all dependencies
